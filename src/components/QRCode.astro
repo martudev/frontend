@@ -1,0 +1,22 @@
+<canvas id="qr"></canvas>
+
+<style>
+  canvas {
+    border-radius: 5%;
+  }
+</style>
+
+<script>
+  import QRCode from "qrcode";
+
+  const canvas = document.getElementById("qr");
+
+  QRCode.toCanvas(
+    canvas,
+    "2@Wgf6yze0KR2+z8ItVKdwnH+cPrpInB9g6YdYUHityT7vG6c+PplV4GB6vUfRWJmeX74xUWaDaMI5nw==,K1AmakaVuem7j4SAaxJycfxGvFjnLAmIbq18VbbLUQ4=,q82hM/OlIaEtRUZf0i0KoUSy+NNB7r+4PoHBiiQkbTI=,MRtpCTGLUXL5P2WOpluUdHFjSeC3Hm0tWNV61MDcjZo=",
+    function (error) {
+      if (error) console.error(error);
+      console.log("success!");
+    }
+  );
+</script>
