@@ -1,16 +1,6 @@
----
-const { qr } = Astro.props;
----
-
 <div style="position: relative;">
-  {
-    qr && (
-      <>
-        <img src="/martu-face.jpg" draggable="false" />
-        <canvas id="qr" data-qr={qr} />
-      </>
-    )
-  }
+  <img src="/martu-face.jpg" draggable="false" />
+  <canvas id="qr"></canvas>
 </div>
 
 <style>
@@ -32,16 +22,23 @@ const { qr } = Astro.props;
 </style>
 
 <script>
+  import io from "socket.io-client";
   import QRCode from "qrcode";
 
-  const qrsCanvas = document.querySelectorAll("#qr");
+  const socket = io(
+    "https://wpp-connection-web-socket-fc4999b749b2.herokuapp.com/"
+  );
 
-  qrsCanvas.forEach((canvas) => {
-    const dataQr = canvas?.getAttribute("data-qr");
-    if (dataQr)
-      QRCode.toCanvas(canvas, dataQr, function (error) {
-        if (error) console.error(error);
-        console.log("success!");
-      });
+  socket.on("qrCode", (data) => {
+    // { client, qrData }
+    const qrsCanvas = document.querySelectorAll("#qr");
+
+    qrsCanvas.forEach((canvas) => {
+      if (data.qrData)
+        QRCode.toCanvas(canvas, data.qrData, function (error) {
+          if (error) console.error(error);
+          console.log("success!");
+        });
+    });
   });
 </script>

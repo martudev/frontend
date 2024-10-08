@@ -1,38 +1,31 @@
 ---
 import QRCode from "@/components/QRCode.astro";
 import Layout from "@/layouts/Layout.astro";
-
-const data = Astro.url.searchParams.get("data")! || "";
 ---
 
-{!data && <h1>QR Not Found</h1>}
-{
-  data && (
-    <Layout title="@martu.dev">
-      <main>
-        <h1>
-          Bienvenidos a <span class="text-gradient">martu.dev Bot</span>
-        </h1>
-        <ul class="instructions">
-          <li>
-            <span>1.</span>Abrir WhatsApp
-          </li>
-          <li>
-            <span>2.</span>Ir a <code>&#8942;</code> ->{" "}
-            <code>Dispositivos vinculados</code> ->
-            <code>Vincular un dispositivo</code>
-          </li>
-          <li>
-            <span>3.</span>Escanear el QR
-          </li>
-        </ul>
-        <div class="qr-container">
-          <QRCode qr={data} />
-        </div>
-      </main>
-    </Layout>
-  )
-}
+<Layout title="@martu.dev">
+  <main>
+    <h1>
+      Bienvenidos a <span class="text-gradient">martu.dev Bot</span>
+    </h1>
+    <ul class="instructions">
+      <li>
+        <span>1.</span>Abrir WhatsApp
+      </li>
+      <li>
+        <span>2.</span>Ir a <code>&#8942;</code> ->{" "}
+        <code>Dispositivos vinculados</code> ->
+        <code>Vincular un dispositivo</code>
+      </li>
+      <li>
+        <span>3.</span>Escanear el QR
+      </li>
+    </ul>
+    <div class="qr-container">
+      <QRCode />
+    </div>
+  </main>
+</Layout>
 
 <style>
   main {
